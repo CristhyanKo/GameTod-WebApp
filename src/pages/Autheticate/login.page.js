@@ -1,29 +1,37 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Button } from 'reactstrap'
 import styled from 'styled-components'
+import image from '../../assets/image/bg.png'
+import imageLogo from '../../assets/image/lg.png'
 
 class Login extends Component {
+
+    componentDidMount() {
+        console.log(image)
+        document.body.style.background = `url(${image}) no-repeat center center fixed`
+        document.body.style.backgroundSize = "cover"
+    }
+
     render() {
         return (
             <div>
-                <Logo>
-                    Game Tod
+                <Logo className='animated pulse'>
+                    <img src={imageLogo} height='60' />
                 </Logo>
                 <Container>
                     <Row>
                         <ColCenter>
-                            <LoginCard>
+                            <LoginCard className='animated swing'>
                                 <CardTitle>Seja bem vindo(a)</CardTitle>
                                 <CardSubtitle>Estamos muito animados em te ver por aqui!</CardSubtitle>
                                 <CardContent>
                                     <InputTitle>E-mail</InputTitle>
-                                    <InputCard type='email'></InputCard>
+                                    <InputCard type='email' />
                                     <InputTitle>Senha</InputTitle>
-                                    <InputCard type='password'></InputCard>
+                                    <InputCard type='password' />
                                     <Link>Esqueceu sua senha?</Link>
                                     <Button color="primary" style={{ marginTop: '20px' }} block>Entrar</Button>
                                     <InputTitle>Precisa de uma conta? <Link>Registre-se</Link></InputTitle>
-
                                 </CardContent>
                             </LoginCard>
                         </ColCenter>
@@ -36,7 +44,7 @@ class Login extends Component {
 }
 
 const Logo = styled.div`
-    padding: 70px;
+    padding: 60px;
 `
 
 const CardContent = styled.div`
@@ -77,7 +85,7 @@ const Link = styled.a`
 const LoginCard = styled.div`
     height: 50%;
     padding:40px;
-    background-color: #36393f !important;
+    background-color: #2f3136 !important;
     border-color: #333 !important;
     box-shadow: 0px 0px 19px 3px rgba(0,0,0,0.11);
     border-radius: 5px;
