@@ -51,6 +51,10 @@ class Auth {
         localStorage.setItem(localStorageVariables.email, email)
         localStorage.setItem(localStorageVariables.avatar, avatar)
     }
+
+    clearAll() {
+        localStorage.clear()
+    }
 }
 
 export default Auth

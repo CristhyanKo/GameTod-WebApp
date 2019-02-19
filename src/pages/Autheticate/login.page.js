@@ -53,6 +53,11 @@ class Login extends Component {
         if (env.keyCode === 13) { this.logar() }
     }
 
+    otherAccount = () => {
+        authenticate.clearAll()
+        this.props.history.push('/')
+    }
+
     render() {
         if (authenticate.isAuthenticated()) {
             this.props.history.push('/')
@@ -76,7 +81,8 @@ class Login extends Component {
                                         <InputValidation style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
                                         <InputTitle>Senha</InputTitle>
                                         <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
-                                        <LinkNav to=''>Esqueceu sua senha?</LinkNav>
+                                        <LinkNav onClick={() => authenticate.clearAll()} to='/'>Esqueceu sua senha?</LinkNav>
+                                        <LinkNavUser onClick={this.otherAccount} style={{float: "right", display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none'}} to=''>Entrar com outra conta</LinkNavUser>
                                         <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Entrar'}</Button>
                                         <InputTitle>Precisa de uma conta? <LinkNav to='/register'>Registre-se</LinkNav></InputTitle>
                                     </CardContent>
@@ -100,6 +106,16 @@ const InputTitle = styled.p`
     font-family: 'Montserrat', sans-serif;
     font-size: 9pt;
     font-weight: bold;
+`
+
+const LinkNavUser = styled.a`
+    color: #007bff !important;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9pt;
+    :hover {
+        text-decoration: underline !important;
+    }
 `
 
 const LinkNav = styled(Link)`
