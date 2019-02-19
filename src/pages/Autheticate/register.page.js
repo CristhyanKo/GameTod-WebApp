@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import image from '../../assets/image/bg.png'
 import InputValidation from '../../components/input-validation.component';
+import auth from '../../services/auth.service'
+import { Icon } from 'semantic-ui-react'
+import { Modal } from 'antd'
+
+const authenticate = new auth()
 
 class Register extends Component {
     state = {
@@ -11,7 +16,8 @@ class Register extends Component {
         nick: '',
         password: '',
         repassword: '',
-        validationInputs: false
+        validationInputs: false,
+        loadinh: false
     }
 
     componentDidMount() {
@@ -19,12 +25,33 @@ class Register extends Component {
         document.body.style.backgroundSize = "cover"
     }
 
+    
+
     registerKeyUp = (env) => {
         if (env.keyCode === 13) { this.register() }
     }
 
     register = () => {
-        this.setState({validationInputs: true})
+        this.setState({
+            validateInput: true,
+            loading: (!!this.state.email && !!this.state.password && !!this.state.nick && this.state.repassword)
+        })
+
+        const data = {
+            nick: this.state.nick,
+            email: this.state.email,
+            password: this.state.password
+        }
+
+        authenticate.register(data).then(res => {
+            Modal.success({
+                title: 'Atencao',
+                content: 'Cadastro efetuado com sucesso!',
+                onOk: () => {
+                    this.props.history.push('/login')
+                }
+            })
+        })
     }
 
     render() {
@@ -48,7 +75,7 @@ class Register extends Component {
                                     <InputTitle>Repita a senha</InputTitle>
                                     <InputValidation validated={this.state.validationInputs} onKeyUp={this.registerKeyUp} value={this.state.repassword} onChange={(env) => this.setState({ repassword: env.target.value })} type='password' />
                                     <LinkNav to='/login'>Já tem uma conta?</LinkNav>
-                                    <Button onKeyUp={this.registerKeyUp} color="primary" style={{ marginTop: '20px' }} onClick={this.register} block>Cadastrar-se</Button>
+                                    <Button onKeyUp={this.registerKeyUp} color="primary" style={{ marginTop: '20px' }} onClick={this.register} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Cadastrar-se'}</Button>
                                 </CardContent>
                             </RegisterCard>
                         </ColCenter>

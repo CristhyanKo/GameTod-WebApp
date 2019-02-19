@@ -3,7 +3,7 @@ import api from './api.service'
 
 class Auth {
     isAuthenticated() {
-         let token = localStorage.getItem(localStorageVariables.token)
+        let token = localStorage.getItem(localStorageVariables.token)
         // let email = localStorage.getItem('userEmail')
         // let validation = (!!token && token.length > 100 && email.includes("@"))
 
@@ -13,9 +13,15 @@ class Auth {
     }
 
     async autheticate(email, password) {
-        await api.post('user/authenticate', {email, password}).then(res => {
-           this.saveDataLogin(res.data)
+        await api.post('user/authenticate', { email, password }).then(res => {
+            this.saveDataLogin(res.data)
+        }).catch(res => {
+            throw (res)
         })
+    }
+
+    async register(data) {
+        await api.post('user', data).catch(res => { throw (res)})
     }
 
     getToken() {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Button } from 'reactstrap'
+import { Modal } from 'antd'
 import styled from 'styled-components'
 import image from '../../assets/image/bg.png'
 import imageLogo from '../../assets/image/lg.png'
@@ -20,9 +21,12 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        console.log(image)
         document.body.style.background = `url(${image}) no-repeat center center fixed`
         document.body.style.backgroundSize = "cover"
+    }
+
+    componentWillUnmount() {
+        document.body.style.background = ``
     }
 
     logar = () => {
@@ -33,6 +37,15 @@ class Login extends Component {
 
         authenticate.autheticate(this.state.email, this.state.password).then(() => {
             this.props.history.push('/')
+        }).catch(err => {
+            if (err.response.status === 401) {
+                Modal.error({
+                    title: 'Atencao',
+                    content: 'E-mail ou senha incorretos',
+                })
+
+                this.setState({ loading: false })
+            }
         })
     }
 
