@@ -5,10 +5,12 @@ import image from '../../assets/image/bg.png'
 import imageLogo from '../../assets/image/lg.png'
 import { Link } from 'react-router-dom'
 import InputValidation from '../../components/input-validation.component';
+import { Icon } from 'semantic-ui-react'
+import localStorageVariables from '../../localstorage-variables'
 
 class Login extends Component {
     state = {
-        email: '',
+        email:  (!!localStorage.getItem(localStorageVariables.email)) ? localStorage.getItem(localStorageVariables.email) : '',
         password: '',
         validateInput: false,
         loading: false
@@ -26,7 +28,11 @@ class Login extends Component {
             loading: (!!this.state.email && !!this.state.password)
         })
 
-        
+        if (!this.state.loading) {
+            return
+        }
+
+        console.log(this.state.email)
     }
 
     logarKeyUp = (env) => {
@@ -45,16 +51,16 @@ class Login extends Component {
                                 </CardTitle>
                                 <hr />
                                 <CardSubtitle>Estamos animados em te ver por aqui!</CardSubtitle>
-                                <Avatar style={{display: (!!localStorage.getItem('@GameTod:avatar')) ? '' : 'none'}}>
-                                    <img alt='Avatar' className="ui small circular image" height='20' src="https://lh3.googleusercontent.com/-HMYrQuX7MYg/WxbrdWr07HI/AAAAAAAAABk/y2_V7N5KDr0gqBr16ynUjV5vjHaxiGoKgCEwYBhgL/w140-h140-p/982e75f263e37de1051930bb2f055478--funny-pugs-cute-pugs.jpg"></img>
+                                <Avatar style={{display: (!!localStorage.getItem(localStorageVariables.avatar)) ? '' : 'none'}}>
+                                    <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui small circular image" height='20'></img>
                                 </Avatar>
                                 <CardContent>
-                                    <InputTitle>E-mail</InputTitle>
-                                    <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({email: env.target.value})} type='email' />
+                                    <InputTitle style={{display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : ''}}>E-mail</InputTitle>
+                                    <InputValidation style={{display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : ''}} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({email: env.target.value})} type='email' />
                                     <InputTitle>Senha</InputTitle>
                                     <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({password: env.target.value})} type='password' />
                                     <LinkNav to=''>Esqueceu sua senha?</LinkNav>
-                                    <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? 'Aguarde...' : 'Entrar'}</Button>
+                                    <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Entrar'}</Button>
                                     <InputTitle>Precisa de uma conta? <LinkNav to='/register'>Registre-se</LinkNav></InputTitle>
                                 </CardContent>
                             </LoginCard>
