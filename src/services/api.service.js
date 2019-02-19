@@ -3,4 +3,4 @@ import config from '../config'
 
 const axiosInstance = axios.create({ baseURL: config.apiBaseUrl });
 
-module.exports = axiosInstance;
+export default axiosInstance;

@@ -7,10 +7,13 @@ import { Link } from 'react-router-dom'
 import InputValidation from '../../components/input-validation.component';
 import { Icon } from 'semantic-ui-react'
 import localStorageVariables from '../../localstorage-variables'
+import auth from '../../services/auth.service'
+
+const authenticate = new auth()
 
 class Login extends Component {
     state = {
-        email:  (!!localStorage.getItem(localStorageVariables.email)) ? localStorage.getItem(localStorageVariables.email) : '',
+        email: (!!localStorage.getItem(localStorageVariables.email)) ? localStorage.getItem(localStorageVariables.email) : '',
         password: '',
         validateInput: false,
         loading: false
@@ -28,11 +31,9 @@ class Login extends Component {
             loading: (!!this.state.email && !!this.state.password)
         })
 
-        if (!this.state.loading) {
-            return
-        }
-
-        console.log(this.state.email)
+        authenticate.autheticate(this.state.email, this.state.password).then(() => {
+            this.props.history.push('/')
+        })
     }
 
     logarKeyUp = (env) => {
@@ -40,36 +41,39 @@ class Login extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <Container>
-                    <Row>
-                        <ColCenter>
-                            <LoginCard className='animated swing'>
-                                <CardTitle>
-                                    <img alt='GameTod' src={imageLogo} height='60' />
-                                </CardTitle>
-                                <hr />
-                                <CardSubtitle>Estamos animados em te ver por aqui!</CardSubtitle>
-                                <Avatar style={{display: (!!localStorage.getItem(localStorageVariables.avatar)) ? '' : 'none'}}>
-                                    <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui small circular image" height='20'></img>
-                                </Avatar>
-                                <CardContent>
-                                    <InputTitle style={{display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : ''}}>E-mail</InputTitle>
-                                    <InputValidation style={{display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : ''}} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({email: env.target.value})} type='email' />
-                                    <InputTitle>Senha</InputTitle>
-                                    <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({password: env.target.value})} type='password' />
-                                    <LinkNav to=''>Esqueceu sua senha?</LinkNav>
-                                    <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Entrar'}</Button>
-                                    <InputTitle>Precisa de uma conta? <LinkNav to='/register'>Registre-se</LinkNav></InputTitle>
-                                </CardContent>
-                            </LoginCard>
-                        </ColCenter>
-                    </Row>
-                </Container>
-            </div>
-
-        )
+        if (authenticate.isAuthenticated()) {
+            this.props.history.push('/')
+        } else {
+            return (
+                <div>
+                    <Container>
+                        <Row>
+                            <ColCenter>
+                                <LoginCard className='animated swing'>
+                                    <CardTitle>
+                                        <img alt='GameTod' src={imageLogo} height='60' />
+                                    </CardTitle>
+                                    <hr />
+                                    <CardSubtitle>Estamos animados em te ver por aqui!</CardSubtitle>
+                                    <Avatar style={{ display: (!!localStorage.getItem(localStorageVariables.avatar)) ? '' : 'none' }}>
+                                        <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui small circular image" height='20'></img>
+                                    </Avatar>
+                                    <CardContent>
+                                        <InputTitle style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }}>E-mail</InputTitle>
+                                        <InputValidation style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
+                                        <InputTitle>Senha</InputTitle>
+                                        <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
+                                        <LinkNav to=''>Esqueceu sua senha?</LinkNav>
+                                        <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Entrar'}</Button>
+                                        <InputTitle>Precisa de uma conta? <LinkNav to='/register'>Registre-se</LinkNav></InputTitle>
+                                    </CardContent>
+                                </LoginCard>
+                            </ColCenter>
+                        </Row>
+                    </Container>
+                </div>
+            )
+        }
     }
 }
 

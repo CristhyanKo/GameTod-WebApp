@@ -4,7 +4,7 @@ class DefaultLayout extends Component {
     render(){
         return(
             <div>
-                <h4>Default Layout</h4>
+                <h4 style={{color: 'white'}}>DASHBOARD</h4>
             </div>
         )
     }
