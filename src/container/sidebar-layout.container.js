@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import '../assets/css/antd-sider.css'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 class SidebarLayout extends Component {
