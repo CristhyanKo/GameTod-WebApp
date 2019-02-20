@@ -8,7 +8,6 @@ class Auth {
         // let validation = (!!token && token.length > 100 && email.includes("@"))
 
         // return (validation)
-        console.log(!!token)
         return !!token
     }
 
@@ -43,13 +42,13 @@ class Auth {
         }
     }
 
-    clear() {
+    async clear() {
         const avatar = localStorage.getItem(localStorageVariables.avatar)
         const email = localStorage.getItem(localStorageVariables.email)
         localStorage.clear()
 
-        localStorage.setItem(localStorageVariables.email, email)
-        localStorage.setItem(localStorageVariables.avatar, avatar)
+        await localStorage.setItem(localStorageVariables.email, email)
+        await localStorage.setItem(localStorageVariables.avatar, avatar)
     }
 
     clearAll() {

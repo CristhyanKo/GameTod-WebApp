@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
+import HeaderLayout from './header-layout.container';
 
 class DefaultLayout extends Component {
     render(){
         return(
             <div>
-                <h4 style={{color: 'white'}}>DASHBOARD</h4>
+                <HeaderLayout {...this.props}/>
             </div>
         )
     }
