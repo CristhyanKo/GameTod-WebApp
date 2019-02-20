@@ -17,9 +17,12 @@ class HeaderLayout extends Component {
     }
 
     render() {
-        const MenuUserTop = <div style={{ backgroud: '#2f3136' }}>
-            <Button color="danger" onClick={this.signout} block>Sair</Button>
-        </div>
+        const MenuUserTop = (
+            <div>
+                <Button color="secondary" block>Perfil</Button>
+                <Button color="danger" onClick={this.signout} block>Sair</Button>
+            </div>
+        )
 
         return (
             <div>
@@ -29,7 +32,7 @@ class HeaderLayout extends Component {
                     </LeftContainer>
 
                     <RightContainer>
-                        <Popover placement="bottomRight" title={localStorage.getItem(localStorageVariables.nick)} content={MenuUserTop} trigger="click">
+                        <Popover placement="bottomRight" title={<b>{localStorage.getItem(localStorageVariables.nick)}</b>} content={MenuUserTop} trigger="click">
                             <Avatar id="MenuUser">
                                 <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui mini circular image"></img>
                             </Avatar>
