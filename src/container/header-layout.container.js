@@ -34,7 +34,7 @@ class HeaderLayout extends Component {
                     <RightContainer>
                         <Popover placement="bottomRight" title={<b>{localStorage.getItem(localStorageVariables.nick)}</b>} content={MenuUserTop} trigger="click">
                             <Avatar id="MenuUser">
-                                <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui mini circular image"></img>
+                                <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui mini circular image animated bounceIn" height='20'></img>
                             </Avatar>
                         </Popover>
                     </RightContainer>

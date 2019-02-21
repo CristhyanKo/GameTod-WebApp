@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd';
+import menus from '../menu'
+import { Label } from 'semantic-ui-react'
+import styled from 'styled-components'
 import '../assets/css/antd-sider.css'
 
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 class SidebarLayout extends Component {
     state = {
@@ -14,37 +18,58 @@ class SidebarLayout extends Component {
         this.setState({ collapsed });
     }
 
+    goRoute = (item, key, keyPath, url) => {
+        this.props.history.push(url)
+    }
+
     render() {
         return (
-            <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{background: '#2F3136'}} >
-                <Menu style={{background: '#42464D'}} theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                    <Menu.Item key="1">
-                        <Icon type="pie-chart" />
-                        <span>Option 1</span>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <Icon type="desktop" />
-                        <span>Option 2</span>
-                    </Menu.Item>
-                    <SubMenu
-                        key="sub1"
-                        title={<span><Icon type="user" /><span>User</span></span>}
-                    >
-                        <Menu.Item key="3">Tom</Menu.Item>
-                        <Menu.Item key="4">Bill</Menu.Item>
-                        <Menu.Item key="5">Alex</Menu.Item>
-                    </SubMenu>
-                    <SubMenu
-                        key="sub2"
-                        title={<span><Icon type="team" /><span>Team</span></span>}
-                    >
-                        <Menu.Item key="6">Team 1</Menu.Item>
-                        <Menu.Item key="8">Team 2</Menu.Item>
-                    </SubMenu>
-                    <Menu.Item key="9">
-                        <Icon type="file" />
-                        <span>File</span>
-                    </Menu.Item>
+            <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{ background: '#2F3136' }} >
+                <Menu style={{ background: '#42464D' }} theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                    {
+                        menus.items.map((item, index) => {
+                            if (item.title) {
+                                return (<MenuItemGroup key={index} title={item.name} style={{ color: 'white !important' }} />)
+                            } else {
+                                if (!!item.children) {
+                                    return (
+                                        <SubMenu key={index} title={
+                                            <span>
+                                                <Icon type={item.icon} />
+                                                <span style={{ top: '3px', position: 'relative' }}>
+                                                    {item.name}
+                                                </span>
+                                            </span>}
+                                        >
+                                            {item.children.map((itemChildren, indexChildren) => {
+                                                return (
+                                                    <Menu.Item onClick={(item, key, keyPath) => this.goRoute(item, key, keyPath, itemChildren.url)} key={index + indexChildren} >
+                                                        <span style={{ top: '3px', position: 'relative' }}> {itemChildren.name} </span>
+                                                        {!!itemChildren.badge && <Badged className='animated bounceIn' size={'mini'} color={itemChildren.badge.color}>
+                                                            {itemChildren.badge.text}
+                                                        </Badged>}
+                                                    </Menu.Item>
+                                                )
+                                            })}
+
+                                        </SubMenu>
+                                    )
+                                } else {
+                                    return (
+                                        <Menu.Item  onClick={(itemProp, key, keyPath) => this.goRoute(itemProp, key, keyPath, item.url)} key={!!item.key ? item.key : index} title={item.title}>
+                                            <Icon type={item.icon} />
+                                            <span style={{ top: '3px', position: 'relative' }}>
+                                                {item.name}
+                                            </span>
+                                            {!!item.badge && <Badged className='animated bounceIn' size={'mini'} color={item.badge.color}>
+                                                {item.badge.text}
+                                            </Badged>}
+                                        </Menu.Item>
+                                    )
+                                }
+                            }
+                        })
+                    }
                 </Menu>
             </Sider>
         )
@@ -52,3 +77,9 @@ class SidebarLayout extends Component {
 }
 
 export default SidebarLayout
+
+const Badged = styled(Label)`
+    float: right;
+    top: 13px;
+    position: relative;
+`
