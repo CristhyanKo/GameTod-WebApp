@@ -7,6 +7,7 @@ import InputValidation from '../../components/input-validation.component';
 import auth from '../../services/auth.service'
 import { Icon } from 'semantic-ui-react'
 import { Modal } from 'antd'
+import { Redirect } from 'react-router-dom'
 
 const authenticate = new auth()
 
@@ -25,7 +26,7 @@ class Register extends Component {
         document.body.style.backgroundSize = "cover"
     }
 
-    
+
 
     registerKeyUp = (env) => {
         if (env.keyCode === 13) { this.register() }
@@ -55,34 +56,38 @@ class Register extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <Container>
-                    <Row>
-                        <ColCenter>
-                            <RegisterCard className='animated swing'>
-                                <CardTitle>
-                                    Criar uma conta
+        if (authenticate.isAuthenticated()) {
+            return (<Redirect to='/' />)
+        } else {
+            return (
+                <div>
+                    <Container>
+                        <Row>
+                            <ColCenter>
+                                <RegisterCard className='animated swing'>
+                                    <CardTitle>
+                                        Criar uma conta
                                 </CardTitle>
-                                <hr />
-                                <CardContent>
-                                    <InputTitle>E-mail</InputTitle>
-                                    <InputValidation validated={this.state.validationInputs} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
-                                    <InputTitle>Nickname</InputTitle>
-                                    <InputValidation validated={this.state.validationInputs} value={this.state.nick} onChange={(env) => this.setState({ nick: env.target.value })} type='text' />
-                                    <InputTitle>Senha</InputTitle>
-                                    <InputValidation validated={this.state.validationInputs} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
-                                    <InputTitle>Repita a senha</InputTitle>
-                                    <InputValidation validated={this.state.validationInputs} onKeyUp={this.registerKeyUp} value={this.state.repassword} onChange={(env) => this.setState({ repassword: env.target.value })} type='password' />
-                                    <LinkNav to='/login'>Já tem uma conta?</LinkNav>
-                                    <Button onKeyUp={this.registerKeyUp} color="primary" style={{ marginTop: '20px' }} onClick={this.register} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Cadastrar-se'}</Button>
-                                </CardContent>
-                            </RegisterCard>
-                        </ColCenter>
-                    </Row>
-                </Container>
-            </div>
-        )
+                                    <hr />
+                                    <CardContent>
+                                        <InputTitle>E-mail</InputTitle>
+                                        <InputValidation validated={this.state.validationInputs} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
+                                        <InputTitle>Nickname</InputTitle>
+                                        <InputValidation validated={this.state.validationInputs} value={this.state.nick} onChange={(env) => this.setState({ nick: env.target.value })} type='text' />
+                                        <InputTitle>Senha</InputTitle>
+                                        <InputValidation validated={this.state.validationInputs} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
+                                        <InputTitle>Repita a senha</InputTitle>
+                                        <InputValidation validated={this.state.validationInputs} onKeyUp={this.registerKeyUp} value={this.state.repassword} onChange={(env) => this.setState({ repassword: env.target.value })} type='password' />
+                                        <LinkNav to='/login'>Já tem uma conta?</LinkNav>
+                                        <Button onKeyUp={this.registerKeyUp} color="primary" style={{ marginTop: '20px' }} onClick={this.register} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Cadastrar-se'}</Button>
+                                    </CardContent>
+                                </RegisterCard>
+                            </ColCenter>
+                        </Row>
+                    </Container>
+                </div>
+            )
+        }
     }
 }
 

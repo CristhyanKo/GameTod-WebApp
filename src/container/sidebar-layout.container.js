@@ -24,7 +24,7 @@ class SidebarLayout extends Component {
 
     render() {
         return (
-            <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{ background: '#2F3136' }} >
+            <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}  style={{ background: '#2F3136' }} >
                 <Menu style={{ background: '#42464D' }} theme="dark" defaultSelectedKeys={['1']} mode="inline">
                     {
                         menus.items.map((item, index) => {
@@ -35,7 +35,7 @@ class SidebarLayout extends Component {
                                     return (
                                         <SubMenu key={index} title={
                                             <span>
-                                                <Icon type={item.icon} />
+                                                <Icon type={item.icon} theme={!!item.iconColor && 'twoTone'} twoToneColor={!!item.iconColor && item.iconColor} />
                                                 <span style={{ top: '3px', position: 'relative' }}>
                                                     {item.name}
                                                 </span>
@@ -43,9 +43,9 @@ class SidebarLayout extends Component {
                                         >
                                             {item.children.map((itemChildren, indexChildren) => {
                                                 return (
-                                                    <Menu.Item onClick={(item, key, keyPath) => this.goRoute(item, key, keyPath, itemChildren.url)} key={index + indexChildren} >
+                                                    <Menu.Item onClick={(item, key, keyPath) => this.goRoute(item, key, keyPath, itemChildren.url)} key={!!itemChildren.key ? itemChildren.key : index + indexChildren + 1 + itemChildren.url} >
                                                         <span style={{ top: '3px', position: 'relative' }}> {itemChildren.name} </span>
-                                                        {!!itemChildren.badge && <Badged className='animated bounceIn' size={'mini'} color={itemChildren.badge.color}>
+                                                        {(!!itemChildren.badge && !this.state.collapsed) && <Badged className='animated bounceIn' size={'mini'} color={itemChildren.badge.color}>
                                                             {itemChildren.badge.text}
                                                         </Badged>}
                                                     </Menu.Item>
@@ -56,12 +56,12 @@ class SidebarLayout extends Component {
                                     )
                                 } else {
                                     return (
-                                        <Menu.Item  onClick={(itemProp, key, keyPath) => this.goRoute(itemProp, key, keyPath, item.url)} key={!!item.key ? item.key : index} title={item.title}>
+                                        <Menu.Item onClick={(itemProp, key, keyPath) => this.goRoute(itemProp, key, keyPath, item.url)} key={!!item.key ? item.key : index + 11} title={item.title}>
                                             <Icon type={item.icon} />
                                             <span style={{ top: '3px', position: 'relative' }}>
                                                 {item.name}
                                             </span>
-                                            {!!item.badge && <Badged className='animated bounceIn' size={'mini'} color={item.badge.color}>
+                                            {(!!item.badge && !this.state.collapsed) && <Badged className='animated bounceIn' size={'mini'} color={item.badge.color}>
                                                 {item.badge.text}
                                             </Badged>}
                                         </Menu.Item>
