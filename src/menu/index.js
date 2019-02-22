@@ -99,44 +99,18 @@ export default {
             icon: 'skin',
         },
         {
+            name: 'Meu Perfil',
+            url: '/chats',
+            icon: 'meh',
+        },
+        {
+            title: true,
+            name: 'Outros'
+        },
+        {
             name: 'Configurações',
             url: '/chats',
             icon: 'setting',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
-        },
-        {
-            name: 'Ajuda',
-            url: '/chats',
-            icon: 'question',
         },
         {
             name: 'Ajuda',

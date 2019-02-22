@@ -3,9 +3,10 @@ import { Button } from 'reactstrap'
 import styled from 'styled-components'
 import imageLogo from '../assets/image/lg.png'
 import localStorageVariables from '../localstorage-variables'
-import { Popover } from 'antd';
+import { Popover, Tooltip } from 'antd';
 import auth from '../services/auth.service'
 import '../assets/css/antd-popover.css'
+import { Label } from 'semantic-ui-react'
 
 const authenticate = new auth()
 
@@ -18,7 +19,23 @@ class HeaderLayout extends Component {
 
     render() {
         const MenuUserTop = (
-            <div>
+            <div style={{color: 'white'}}>
+                Status
+                <StatusBar>
+                    <Tooltip title="Online">
+                        <a href='#'><Label circular color='green' empty /></a>
+                    </Tooltip>
+                    <Tooltip title="Ocupado">
+                        <a href='#'><Label circular color='red' empty /></a>
+                    </Tooltip>
+                    <Tooltip title="Ausente">
+                        <a href='#'><Label circular color='orange' empty /></a>
+                    </Tooltip>
+                    <Tooltip title="Invisivel">
+                        <a href='#'><Label circular color='white' empty /></a>
+                    </Tooltip>
+                </StatusBar>
+                <hr/>
                 <Button color="secondary" block>Perfil</Button>
                 <Button color="danger" onClick={this.signout} block>Sair</Button>
             </div>
@@ -74,4 +91,15 @@ const Avatar = styled.a`
     img {
         border: 3px #00c674 solid !important;
     }
+`
+
+const StatusBar = styled.div`
+    display: flex;
+    justify-content: space-between;
+    background: #42464D;
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 7px;
+    a { display: flex }
 `
