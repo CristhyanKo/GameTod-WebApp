@@ -18,7 +18,7 @@ class Register extends Component {
         password: '',
         repassword: '',
         validationInputs: false,
-        loadinh: false
+        loading: false
     }
 
     componentDidMount() {
@@ -29,6 +29,7 @@ class Register extends Component {
 
 
     registerKeyUp = (env) => {
+        env.preventDefault()
         if (env.keyCode === 13) { this.register() }
     }
 
@@ -52,6 +53,15 @@ class Register extends Component {
                     this.props.history.push('/login')
                 }
             })
+        }).catch(err => {
+            console.log(err.response.data)
+            if (err.response.data['code']) {
+                Modal.error({
+                    title: 'Atencao',
+                    content: err.response.data.error
+                })
+            }
+            this.setState({loading:false})
         })
     }
 
@@ -79,7 +89,7 @@ class Register extends Component {
                                         <InputTitle>Repita a senha</InputTitle>
                                         <InputValidation validated={this.state.validationInputs} onKeyUp={this.registerKeyUp} value={this.state.repassword} onChange={(env) => this.setState({ repassword: env.target.value })} type='password' />
                                         <LinkNav to='/login'>Já tem uma conta?</LinkNav>
-                                        <Button onKeyUp={this.registerKeyUp} color="primary" style={{ marginTop: '20px' }} onClick={this.register} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Cadastrar-se'}</Button>
+                                        <Button disabled={this.state.loading} onKeyUp={this.registerKeyUp} color="primary" style={{ marginTop: '20px' }} onClick={this.register} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Cadastrar-se'}</Button>
                                     </CardContent>
                                 </RegisterCard>
                             </ColCenter>
