@@ -6,7 +6,7 @@ import image from '../../assets/image/bg.png'
 import imageLogo from '../../assets/image/lg.png'
 import { Link } from 'react-router-dom'
 import InputValidation from '../../components/input-validation.component';
-import { Icon } from 'semantic-ui-react'
+import { Icon, Label } from 'semantic-ui-react'
 import localStorageVariables from '../../localstorage-variables'
 import auth from '../../services/auth.service'
 import { Redirect } from 'react-router-dom'
@@ -80,8 +80,9 @@ class Login extends Component {
                                     </AvatarImage>
 
                                     <CardContent>
-                                        <InputTitle style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }}>E-mail</InputTitle>
+                                        <InputTitle>E-mail</InputTitle>
                                         <InputValidation style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
+                                        <Label color='grey' style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }}>{localStorage.getItem(localStorageVariables.email)}</Label>
                                         <InputTitle>Senha</InputTitle>
                                         <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
                                         <LinkNav onClick={() => authenticate.clearAll()} to='/'>Esqueceu sua senha?</LinkNav>
@@ -166,7 +167,7 @@ const CardSubtitle = styled.div`
 `
 
 const ColCenter = styled.div`
-    margin-top: 100px;
+    margin-top: 70px;
     width: 100%;
     height: 100%;
     display: flex;
