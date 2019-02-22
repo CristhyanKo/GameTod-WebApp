@@ -1,14 +1,28 @@
 import localStorageVariables from '../localstorage-variables'
 import api from './api.service'
 
+async function validateToken(token) {
+    try {
+        const res = await api.post('/user/validate-token', null, { headers: { "x-access-token": token } })
+        return res.data.valid
+    } catch {
+        return false
+    }
+}
+
 class Auth {
     isAuthenticated() {
-        let token = localStorage.getItem(localStorageVariables.token)
-        // let email = localStorage.getItem('userEmail')
-        // let validation = (!!token && token.length > 100 && email.includes("@"))
+        const token = localStorage.getItem(localStorageVariables.token)
+        const email = localStorage.getItem(localStorageVariables.email)
 
-        // return (validation)
-        return !!token
+        if (!!token) {
+            const tokenValid = validateToken(token)
+            const validate = (!!token && token.length > 100 && email.includes("@") && tokenValid)
+
+            return validate;
+        } else{
+            return false
+        }
     }
 
     async autheticate(email, password) {
@@ -20,7 +34,7 @@ class Auth {
     }
 
     async register(data) {
-        await api.post('user', data).catch(res => { throw (res)})
+        await api.post('user', data).catch(res => { throw (res) })
     }
 
     getToken() {

@@ -34,7 +34,7 @@ class Register extends Component {
 
     register = () => {
         this.setState({
-            validateInput: true,
+            validationInputs: true,
             loading: (!!this.state.email && !!this.state.password && !!this.state.nick && this.state.repassword)
         })
 
@@ -71,7 +71,7 @@ class Register extends Component {
                                     <hr />
                                     <CardContent>
                                         <InputTitle>E-mail</InputTitle>
-                                        <InputValidation validated={this.state.validationInputs} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
+                                        <InputValidation isEmail={true} validated={this.state.validationInputs} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
                                         <InputTitle>Nickname</InputTitle>
                                         <InputValidation validated={this.state.validationInputs} value={this.state.nick} onChange={(env) => this.setState({ nick: env.target.value })} type='text' />
                                         <InputTitle>Senha</InputTitle>
