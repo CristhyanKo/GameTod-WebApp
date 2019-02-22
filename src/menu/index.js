@@ -108,5 +108,40 @@ export default {
             url: '/chats',
             icon: 'question',
         },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
+        {
+            name: 'Ajuda',
+            url: '/chats',
+            icon: 'question',
+        },
     ]
 }

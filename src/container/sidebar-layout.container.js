@@ -25,7 +25,7 @@ class SidebarLayout extends Component {
     render() {
         return (
             <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}  style={{ background: '#2F3136' }} >
-                <Menu style={{ background: '#42464D' }} theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                <Menu style={{ background: '#42464D', maxHeight: '85vh', overflow: 'auto'}} theme="dark" defaultSelectedKeys={['1']} mode="inline">
                     {
                         menus.items.map((item, index) => {
                             if (item.title) {

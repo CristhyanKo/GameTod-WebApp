@@ -8,7 +8,7 @@ class DefaultLayout extends Component {
         return (
             <Layout>
                 <HeaderLayout {...this.props} />
-                <Layout style={{ minHeight: '100vh' }}>
+                <Layout style={{ minHeight: '91vh' }}>
                     <SidebarLayout {...this.props} />
                     <Layout style={{background: '#36393f', padding: '20px', color: '#fff'}}>
                         Hello Word
