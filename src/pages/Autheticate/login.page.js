@@ -10,6 +10,7 @@ import { Icon } from 'semantic-ui-react'
 import localStorageVariables from '../../localstorage-variables'
 import auth from '../../services/auth.service'
 import { Redirect } from 'react-router-dom'
+import AvatarUser from '../../components/avatar.component';
 
 const authenticate = new auth()
 
@@ -61,7 +62,7 @@ class Login extends Component {
 
     render() {
         if (authenticate.isAuthenticated()) {
-            return (<Redirect to='/'/>)
+            return (<Redirect to='/' />)
         } else {
             return (
                 <div>
@@ -74,9 +75,10 @@ class Login extends Component {
                                     </CardTitle>
                                     <hr />
                                     <CardSubtitle>Estamos animados em te ver por aqui!</CardSubtitle>
-                                    <Avatar style={{ display: (!!localStorage.getItem(localStorageVariables.avatar)) ? '' : 'none' }}>
-                                        <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui small circular image" height='20'></img>
-                                    </Avatar>
+                                    <AvatarImage style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }}>
+                                        <AvatarUser size={150} fontSize={'32pt'} />
+                                    </AvatarImage>
+
                                     <CardContent>
                                         <InputTitle style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }}>E-mail</InputTitle>
                                         <InputValidation style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
@@ -138,7 +140,7 @@ const LoginCard = styled.div`
     border-radius: 5px;
 `
 
-const Avatar = styled.div`
+const AvatarImage = styled.div`
     margin-top: 30px;
     display: flex;
     justify-content: center;

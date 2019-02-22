@@ -59,10 +59,12 @@ class Auth {
     async clear() {
         const avatar = localStorage.getItem(localStorageVariables.avatar)
         const email = localStorage.getItem(localStorageVariables.email)
+        const nick = localStorage.getItem(localStorageVariables.nick)
         localStorage.clear()
 
         await localStorage.setItem(localStorageVariables.email, email)
         await localStorage.setItem(localStorageVariables.avatar, avatar)
+        await localStorage.setItem(localStorageVariables.nick, nick)
     }
 
     clearAll() {

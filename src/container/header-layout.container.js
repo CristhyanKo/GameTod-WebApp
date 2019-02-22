@@ -7,6 +7,7 @@ import { Popover, Tooltip } from 'antd';
 import auth from '../services/auth.service'
 import '../assets/css/antd-popover.css'
 import { Label } from 'semantic-ui-react'
+import AvatarUser from '../components/avatar.component';
 
 const authenticate = new auth()
 
@@ -19,23 +20,23 @@ class HeaderLayout extends Component {
 
     render() {
         const MenuUserTop = (
-            <div style={{color: 'white'}}>
+            <div style={{ color: 'white' }}>
                 Status
                 <StatusBar>
                     <Tooltip title="Online">
-                        <a href='#'><Label circular color='green' empty /></a>
+                        <a href='/#'><Label circular color='green' empty /></a>
                     </Tooltip>
                     <Tooltip title="Ocupado">
-                        <a href='#'><Label circular color='red' empty /></a>
+                        <a href='/#'><Label circular color='red' empty /></a>
                     </Tooltip>
                     <Tooltip title="Ausente">
-                        <a href='#'><Label circular color='orange' empty /></a>
+                        <a href='/#'><Label circular color='orange' empty /></a>
                     </Tooltip>
                     <Tooltip title="Invisivel">
-                        <a href='#'><Label circular color='white' empty /></a>
+                        <a href='/#'><Label circular empty /></a>
                     </Tooltip>
                 </StatusBar>
-                <hr/>
+                <hr />
                 <Button color="secondary" block>Perfil</Button>
                 <Button color="danger" onClick={this.signout} block>Sair</Button>
             </div>
@@ -50,9 +51,9 @@ class HeaderLayout extends Component {
 
                     <RightContainer>
                         <Popover placement="bottomRight" title={<b>{localStorage.getItem(localStorageVariables.nick)}</b>} content={MenuUserTop} trigger="click">
-                            <Avatar id="MenuUser">
-                                <img alt='Avatar' src={localStorage.getItem(localStorageVariables.avatar)} className="ui mini circular image animated bounceIn" height='20'></img>
-                            </Avatar>
+                            <AvatarImage id="MenuUser">
+                                <AvatarUser size={40} fontSize={''} />
+                            </AvatarImage>
                         </Popover>
                     </RightContainer>
                 </Container>
@@ -83,13 +84,13 @@ const RightContainer = styled.div`
     justify-content: right;
 `
 
-const Avatar = styled.a`
+const AvatarImage = styled.a`
     margin-right: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     img {
-        border: 3px #00c674 solid !important;
+        /* border: 3px #00c674 solid !important; */
     }
 `
 
