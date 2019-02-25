@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Affix } from 'antd'
 import { Button } from 'reactstrap'
 import styled from 'styled-components'
 import imageLogo from '../assets/image/lg.png'
@@ -20,7 +21,7 @@ class HeaderLayout extends Component {
 
     render() {
         const MenuUserTop = (
-            <div style={{ color: 'white' }}>
+            <div style={{ color: 'white'}}>
                 Status
                 <StatusBar>
                     <Tooltip title="Online">
@@ -43,7 +44,7 @@ class HeaderLayout extends Component {
         )
 
         return (
-            <div>
+            <Affix>
                 <Container>
                     <LeftContainer>
                         <img alt='GameTod' src={imageLogo} height='50' />
@@ -54,10 +55,13 @@ class HeaderLayout extends Component {
                             <AvatarImage id="MenuUser">
                                 <AvatarUser size={40} fontSize={''} />
                             </AvatarImage>
+                            <Tooltip title="Online" style={{ position: 'absolute'}}>
+                                <a style={{ position: 'absolute', top: 35, right: 22}} href='/#'><Label circular color='green' empty /></a>
+                            </Tooltip>
                         </Popover>
                     </RightContainer>
                 </Container>
-            </div >
+            </Affix>
         )
     }
 }

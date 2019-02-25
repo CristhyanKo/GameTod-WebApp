@@ -6,12 +6,15 @@ import { Layout } from 'antd';
 import routes from '../routes'
 
 class DefaultLayout extends Component {
+    state = {
+        top: 60
+    }
     render() {
         return (
             <Layout>
                 <HeaderLayout {...this.props} />
                 <Layout style={{ minHeight: '91vh' }}>
-                    <SidebarLayout {...this.props} />
+                    <SidebarLayout  {...this.props} />
                     <Layout style={{ background: '#36393f', padding: '20px', color: '#fff' }}>
                         <Switch>
                             {routes.map((route, idx) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row, Button } from 'reactstrap'
 import { Modal } from 'antd'
 import styled from 'styled-components'
-import image from '../../assets/image/bg.png'
+import image from '../../assets/image/bg.jpg'
 import imageLogo from '../../assets/image/lg.png'
 import { Link } from 'react-router-dom'
 import InputValidation from '../../components/input-validation.component';
