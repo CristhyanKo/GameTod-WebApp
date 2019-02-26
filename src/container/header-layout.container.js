@@ -21,7 +21,7 @@ class HeaderLayout extends Component {
 
     render() {
         const MenuUserTop = (
-            <div style={{ color: 'white'}}>
+            <div style={{ color: 'white' }}>
                 Status
                 <StatusBar>
                     <Tooltip title="Online">
@@ -44,8 +44,8 @@ class HeaderLayout extends Component {
         )
 
         return (
-            <Affix>
-                <Container>
+            <Container>
+                <Affix>
                     <LeftContainer>
                         <img alt='GameTod' src={imageLogo} height='50' />
                     </LeftContainer>
@@ -55,13 +55,13 @@ class HeaderLayout extends Component {
                             <AvatarImage id="MenuUser">
                                 <AvatarUser size={40} fontSize={''} />
                             </AvatarImage>
-                            <Tooltip title="Online" style={{ position: 'absolute'}}>
-                                <a style={{ position: 'absolute', top: 35, right: 22}} href='/#'><Label circular color='green' empty /></a>
+                            <Tooltip placement="bottom" title="Online" style={{ position: 'absolute' }}>
+                                <a style={{ position: 'absolute', top: 30, right: 22 }} href='/#'><Label circular color='green' empty /></a>
                             </Tooltip>
                         </Popover>
                     </RightContainer>
-                </Container>
-            </Affix>
+                </Affix>
+            </Container>
         )
     }
 }
@@ -76,6 +76,9 @@ const Container = styled.div`
 `
 
 const LeftContainer = styled.div`
+    position: absolute;
+    left: 1px;
+    top: 5px;
     flex:1;
     img {
         margin-left: 20px;
@@ -83,6 +86,9 @@ const LeftContainer = styled.div`
 `
 
 const RightContainer = styled.div`
+    position: absolute;
+    right: 1px;
+    top: 10px;
     display: flex;
     align-items: right;
     justify-content: right;

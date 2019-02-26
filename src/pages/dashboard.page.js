@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { Col, Row } from 'reactstrap'
+import PrivatePage from '../components/private-page.component';
+import { Card, BigCard, ClearCard } from '../styles/card.styled'
 
 class Dashboard extends Component {
     render() {
         return (
-            <div>
+            <PrivatePage>
                 <Row>
                     <Col>
                         <h3 style={{ color: '#fff' }}>
@@ -37,59 +38,31 @@ class Dashboard extends Component {
                 </Row>
                 <Row>
                     <Col sm={12} md={6}>
-                        <GameCard>
+                        <ClearCard>
 
-                        </GameCard>
+                        </ClearCard>
                     </Col>
                     <Col sm={12} md={6}>
-                        <GameCard>
+                        <ClearCard>
 
-                        </GameCard>
+                        </ClearCard>
                     </Col>
                 </Row>
                 <Row>
                     <Col sm={12} md={6}>
-                        <GameCard>
+                        <ClearCard>
 
-                        </GameCard>
+                        </ClearCard>
                     </Col>
                     <Col sm={12} md={6}>
-                        <GameCard>
+                        <ClearCard>
 
-                        </GameCard>
+                        </ClearCard>
                     </Col>
                 </Row>
-            </div>
+            </PrivatePage>
         )
     }
 }
 
 export default Dashboard
-
-const Card = styled.div`
-    width:100%;
-    padding:40px;
-    background-color: #202225 !important;
-    border-color: #333 !important;
-    border-radius: 5px;
-    margin-bottom: 10px;
-`
-
-const GameCard = styled.div`
-    width:100%;
-    padding:40px;
-    background-color: #2f3136 !important;
-    border-color: #333 !important;
-    border-radius: 5px;
-    margin-bottom: 10px;
-`
-
-const BigCard = styled.div`
-    width:100%;
-    height: 350px;
-    padding:40px;
-    background-color: #202225 !important;
-    border-color: #333 !important;
-    border-radius: 5px;
-    margin-bottom: 10px;
-`

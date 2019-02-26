@@ -100,7 +100,7 @@ export default {
         },
         {
             name: 'Meu Perfil',
-            url: '/chats',
+            url: '/profile',
             icon: 'meh',
         },
         {
