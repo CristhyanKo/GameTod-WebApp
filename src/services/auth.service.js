@@ -49,6 +49,8 @@ class Auth {
         if (!!data) {
             localStorage.setItem(localStorageVariables.token, data.token)
             localStorage.setItem(localStorageVariables.email, data.data.email)
+            localStorage.setItem(localStorageVariables.firstName, data.data.firstName)
+            localStorage.setItem(localStorageVariables.secondName, data.data.secondName)
             localStorage.setItem(localStorageVariables.avatar, data.data.avatar)
             localStorage.setItem(localStorageVariables.nick, data.data.nick)
         } else {
@@ -57,11 +59,15 @@ class Auth {
     }
 
     async clear() {
+        const firstName = localStorage.getItem(localStorageVariables.firstName)
+        const secondName = localStorage.getItem(localStorageVariables.secondName)
         const avatar = localStorage.getItem(localStorageVariables.avatar)
         const email = localStorage.getItem(localStorageVariables.email)
         const nick = localStorage.getItem(localStorageVariables.nick)
         localStorage.clear()
 
+        await localStorage.setItem(localStorageVariables.firstName, firstName)
+        await localStorage.setItem(localStorageVariables.secondName, secondName)
         await localStorage.setItem(localStorageVariables.email, email)
         await localStorage.setItem(localStorageVariables.avatar, avatar)
         await localStorage.setItem(localStorageVariables.nick, nick)

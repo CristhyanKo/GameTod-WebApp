@@ -2,19 +2,33 @@ import React, { Component } from 'react'
 import { Col, Row, Button } from 'reactstrap'
 import styled from 'styled-components'
 import PrivatePage from '../components/private-page.component'
-import { ClearCard } from '../styles/card.styled'
+import { ClearCard, Card } from '../styles/card.styled'
 import AvatarUser from '../components/avatar.component';
 import localStorageVariables from '../localstorage-variables'
 import InputValidation from '../components/input-validation.component';
+import { Icon } from 'antd';
 
 class Profile extends Component {
     state = {
         email: localStorage.getItem(localStorageVariables.email),
-        nick: localStorage.getItem(localStorageVariables.nick)
+        nick: localStorage.getItem(localStorageVariables.nick),
+        firstName: localStorage.getItem(localStorageVariables.firstName),
+        secondName: localStorage.getItem(localStorageVariables.secondName)
     }
     render() {
         return (
             <PrivatePage className="animated fadeIn">
+                <Card padding={'10px'}>
+                    <Row>
+                        <Col>
+                            <h3 style={{ color: '#fff' }}>
+                                Perfil
+                            </h3>
+                        </Col>
+                    </Row>
+                </Card>
+
+
                 <ClearCard>
                     <Row>
                         <Col md={{ size: 2, offset: 1 }}>
@@ -24,20 +38,44 @@ class Profile extends Component {
                                 </AvatarImage>
                             </center>
 
-                            <Button style={{margin: '20px 0px'}} color="secondary" block>Alterar avatar</Button>
+                            <Button style={{ margin: '20px 0px' }} color="warning" block>Alterar avatar</Button>
                         </Col>
                         <Col md={{ size: 8, offset: 1 }}>
                             <Row>
+                                <Col md={4}>
+                                    <InputTitle>Nome</InputTitle>
+                                    <InputValidation value={this.state.firstName} validated={false} type='text' />
+                                </Col>
+
+                                <Col md={4}>
+                                    <InputTitle>Sobrenome</InputTitle>
+                                    <InputValidation value={this.state.secondName} n validated={false} type='text' />
+                                </Col>
+                            </Row>
+
+                            <Row style={{ marginTop: 10 }}>
                                 <Col md={6}>
                                     <InputTitle>Nick</InputTitle>
-                                    <InputValidation validated={false} value={this.state.nick} type='email' />
+                                    <InputValidation validated={false} value={this.state.nick} type='text' />
                                 </Col>
                             </Row>
 
                             <Row style={{ marginTop: 10 }}>
                                 <Col md={6}>
                                     <InputTitle>E-mail</InputTitle>
-                                    <InputValidation disabled validated={false} value={this.state.email} type='email' />
+                                    <InputValidation textColor={'#5A6268'} disabled validated={false} value={this.state.email} type='email' />
+                                </Col>
+                            </Row>
+                            <hr />
+                            <Row>
+                                <Col md={3}>
+                                    <Button style={{ marginBottom: '20px' }} color="secondary" block>Alterar e-mail</Button>
+                                </Col>
+                                <Col md={3}>
+                                    <Button style={{ marginBottom: '20px' }} color="secondary" block>Alterar senha</Button>
+                                </Col>
+                                <Col md={2}>
+                                    <Button style={{ marginBottom: '20px' }} color="success" block>Salvar</Button>
                                 </Col>
                             </Row>
                         </Col>

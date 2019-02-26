@@ -81,7 +81,7 @@ class Login extends Component {
 
                                     <CardContent>
                                         <InputTitle>E-mail</InputTitle>
-                                        <InputValidation style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
+                                        <InputValidation width={'100%'} style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
                                         <Label color='grey' style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }}>{localStorage.getItem(localStorageVariables.email)}</Label>
                                         <InputTitle>Senha</InputTitle>
                                         <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />

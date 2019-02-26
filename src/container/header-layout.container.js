@@ -38,14 +38,13 @@ class HeaderLayout extends Component {
                     </Tooltip>
                 </StatusBar>
                 <hr />
-                <Button color="secondary" block>Perfil</Button>
+                <Button color="secondary" block onClick={() => { this.props.history.push('/profile') }}>Perfil</Button>
                 <Button color="danger" onClick={this.signout} block>Sair</Button>
             </div>
         )
 
         return (
-            <Container>
-                <Affix>
+                <Container>
                     <LeftContainer>
                         <img alt='GameTod' src={imageLogo} height='50' />
                     </LeftContainer>
@@ -60,8 +59,7 @@ class HeaderLayout extends Component {
                             </Tooltip>
                         </Popover>
                     </RightContainer>
-                </Affix>
-            </Container>
+                </Container>
         )
     }
 }
@@ -69,10 +67,13 @@ class HeaderLayout extends Component {
 export default HeaderLayout
 
 const Container = styled.div`
+    position: fixed;
+    z-index: 1;
     display: flex;
     align-items: center;
     background-color: #202225;
     height: 60px;
+    width: 100%;
 `
 
 const LeftContainer = styled.div`
@@ -86,7 +87,7 @@ const LeftContainer = styled.div`
 `
 
 const RightContainer = styled.div`
-    position: absolute;
+    position: fixed;
     right: 1px;
     top: 10px;
     display: flex;

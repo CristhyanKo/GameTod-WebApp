@@ -14,6 +14,8 @@ const authenticate = new auth()
 class Register extends Component {
     state = {
         email: '',
+        firstName: '',
+        secondName: '',
         nick: '',
         password: '',
         repassword: '',
@@ -26,8 +28,6 @@ class Register extends Component {
         document.body.style.backgroundSize = "cover"
     }
 
-
-
     registerKeyUp = (env) => {
         env.preventDefault()
         if (env.keyCode === 13) { this.register() }
@@ -36,10 +36,12 @@ class Register extends Component {
     register = () => {
         this.setState({
             validationInputs: true,
-            loading: (!!this.state.email && !!this.state.password && !!this.state.nick && this.state.repassword)
+            loading: (!!this.state.email && !!this.state.firstName && !!this.state.secondName && !!this.state.password && !!this.state.nick && this.state.repassword)
         })
 
         const data = {
+            firstName: this.state.firstName,
+            secondName: this.state.secondName,
             nick: this.state.nick,
             email: this.state.email,
             password: this.state.password
@@ -80,6 +82,10 @@ class Register extends Component {
                                 </CardTitle>
                                     <hr />
                                     <CardContent>
+                                    <InputTitle>Nome</InputTitle>
+                                        <InputValidation validated={this.state.validationInputs} value={this.state.firstName} onChange={(env) => this.setState({ firstName: env.target.value })} type='text' />
+                                        <InputTitle>Sobrenome</InputTitle>
+                                        <InputValidation validated={this.state.validationInputs} value={this.state.secondName} onChange={(env) => this.setState({ secondName: env.target.value })} type='text' />
                                         <InputTitle>E-mail</InputTitle>
                                         <InputValidation isEmail={true} validated={this.state.validationInputs} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
                                         <InputTitle>Nickname</InputTitle>

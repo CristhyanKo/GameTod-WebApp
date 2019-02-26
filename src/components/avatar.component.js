@@ -22,7 +22,7 @@ class AvatarUser extends Component {
                 src={(!!localStorage.getItem(localStorageVariables.avatar) !== 'undefined') ? localStorage.getItem(localStorageVariables.avatar) : ''}
                 style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none', background: (!!localStorage.getItem(localStorageVariables.nick) ? stringToColour(localStorage.getItem(localStorageVariables.nick)) : ''), fontSize: this.props.fontSize }}
             >
-                {((localStorage.getItem(localStorageVariables.avatar) === 'undefined') && (!!localStorage.getItem(localStorageVariables.email))) && localStorage.getItem(localStorageVariables.nick).substring(0, 2).toUpperCase()}
+                {((localStorage.getItem(localStorageVariables.avatar) === 'undefined') && (!!localStorage.getItem(localStorageVariables.email))) && localStorage.getItem(localStorageVariables.firstName).substring(0, 1).toUpperCase() + localStorage.getItem(localStorageVariables.secondName).substring(0, 1).toUpperCase()}
             </Avatar>
         )
     }

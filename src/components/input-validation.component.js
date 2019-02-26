@@ -23,7 +23,7 @@ class InputValidation extends Component {
             <div>
                 {!!(this.props.value === '' && this.props.validated) && <Label pointing='below' className={'animated pulse'} color={'red'} >Este campo é de preenchimento obrigatório.</Label>}
                 {!!(this.state.emailValidated && this.props.isEmail) && <Label pointing='below' className={'animated pulse'} color={'red'} >O e-mail informado é inválido.</Label>}
-                <InputStyled style={{ width: (!!this.props.width) ? this.props.width : '100%' }} onBlur={(env) => this.validateEmail(env.target.value)} {...this.props} />
+                <InputStyled style={{color: (!!this.props.textColor) ? this.props.textColor : '#f6f6f7' }} onBlur={(env) => this.validateEmail(env.target.value)} {...this.props} />
             </div>
         )
     }
@@ -32,9 +32,9 @@ class InputValidation extends Component {
 export default InputValidation
 
 const InputStyled = styled.input`
+    width: 100% !important;
     background-color: rgba(0,0,0,.1) !important;
     border-color: rgba(0,0,0,.3) !important;
-    color: #f6f6f7 !important;
     border-radius: 3px !important;
     border-style: solid !important;
     border-width: 1px !important;
