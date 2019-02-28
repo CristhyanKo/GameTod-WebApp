@@ -23,7 +23,7 @@ class InputValidation extends Component {
             <div>
                 {!!(this.props.value === '' && this.props.validated) && <Label pointing='below' className={'animated pulse'} color={'red'} >Este campo é de preenchimento obrigatório.</Label>}
                 {!!(this.state.emailValidated && this.props.isEmail) && <Label pointing='below' className={'animated pulse'} color={'red'} >O e-mail informado é inválido.</Label>}
-                <InputStyled style={{color: (!!this.props.textColor) ? this.props.textColor : '#f6f6f7' }} onBlur={(env) => this.validateEmail(env.target.value)} {...this.props} />
+                <InputStyled autoComplete="auto" style={{color: (!!this.props.textColor) ? this.props.textColor : '#f6f6f7' }} onBlur={(env) => this.validateEmail(env.target.value)} {...this.props} />
             </div>
         )
     }

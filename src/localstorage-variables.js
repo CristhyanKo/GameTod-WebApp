@@ -1,6 +1,7 @@
 const prefix = '@GameTod'
 
 module.exports = {
+    id: `${prefix}:id`,
     token: `${prefix}:token`,
     avatar: `${prefix}:avatar`,
     firstName: `${prefix}:firstName`,

@@ -76,19 +76,21 @@ class Login extends Component {
                                     <hr />
                                     <CardSubtitle>Estamos animados em te ver por aqui!</CardSubtitle>
                                     <AvatarImage style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }}>
-                                        <AvatarUser size={150} fontSize={'32pt'} />
+                                        <AvatarUser imageSrc={localStorage.getItem(localStorageVariables.avatar)} size={150} fontSize={'32pt'} />
                                     </AvatarImage>
 
                                     <CardContent>
-                                        <InputTitle>E-mail</InputTitle>
-                                        <InputValidation width={'100%'} style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
-                                        <Label color='grey' style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }}>{localStorage.getItem(localStorageVariables.email)}</Label>
-                                        <InputTitle>Senha</InputTitle>
-                                        <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
-                                        <LinkNav onClick={() => authenticate.clearAll()} to='/'>Esqueceu sua senha?</LinkNav>
-                                        <LinkNavUser onClick={this.otherAccount} style={{ float: "right", display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }} to=''>Entrar com outra conta</LinkNavUser>
-                                        <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Entrar'}</Button>
-                                        <InputTitle>Precisa de uma conta? <LinkNav to='/register'>Registre-se</LinkNav></InputTitle>
+                                        <form>
+                                            <InputTitle>E-mail</InputTitle>
+                                            <InputValidation width={'100%'} style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? 'none' : '' }} onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.email} onChange={(env) => this.setState({ email: env.target.value })} type='email' />
+                                            <Label color='grey' style={{ display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }}>{localStorage.getItem(localStorageVariables.email)}</Label>
+                                            <InputTitle>Senha</InputTitle>
+                                            <InputValidation onKeyUp={this.logarKeyUp} validated={this.state.validateInput} value={this.state.password} onChange={(env) => this.setState({ password: env.target.value })} type='password' />
+                                            <LinkNav onClick={() => authenticate.clearAll()} to='/'>Esqueceu sua senha?</LinkNav>
+                                            <LinkNavUser onClick={this.otherAccount} style={{ float: "right", display: (!!localStorage.getItem(localStorageVariables.email)) ? '' : 'none' }} to=''>Entrar com outra conta</LinkNavUser>
+                                            <Button onKeyUp={this.logarKeyUp} onClick={this.logar} color="primary" style={{ marginTop: '20px' }} block>{!!this.state.loading ? <Icon name='circle notched' loading /> : 'Entrar'}</Button>
+                                            <InputTitle>Precisa de uma conta? <LinkNav to='/register'>Registre-se</LinkNav></InputTitle>
+                                        </form>
                                     </CardContent>
                                 </LoginCard>
                             </ColCenter>

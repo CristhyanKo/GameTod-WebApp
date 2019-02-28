@@ -6,7 +6,7 @@ import { Card, BigCard, ClearCard } from '../styles/card.styled'
 class Dashboard extends Component {
     render() {
         return (
-            <PrivatePage>
+            <PrivatePage {...this.props}>
                 <Row>
                     <Col>
                         <h3 style={{ color: '#fff' }}>

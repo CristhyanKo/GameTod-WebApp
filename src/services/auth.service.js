@@ -1,26 +1,15 @@
 import localStorageVariables from '../localstorage-variables'
 import api from './api.service'
 
-async function validateToken(token) {
-    try {
-        const res = await api.post('/user/validate-token', null, { headers: { "x-access-token": token } })
-        return res.data.valid
-    } catch {
-        return false
-    }
-}
-
 class Auth {
     isAuthenticated() {
         const token = localStorage.getItem(localStorageVariables.token)
         const email = localStorage.getItem(localStorageVariables.email)
 
         if (!!token) {
-            const tokenValid = validateToken(token)
-            const validate = (!!token && token.length > 100 && email.includes("@") && tokenValid)
-
+            const validate = (!!token && token.length > 100 && email.includes("@"))
             return validate;
-        } else{
+        } else {
             return false
         }
     }
@@ -48,6 +37,7 @@ class Auth {
     saveDataLogin(data) {
         if (!!data) {
             localStorage.setItem(localStorageVariables.token, data.token)
+            localStorage.setItem(localStorageVariables.id, data.data.id)
             localStorage.setItem(localStorageVariables.email, data.data.email)
             localStorage.setItem(localStorageVariables.firstName, data.data.firstName)
             localStorage.setItem(localStorageVariables.secondName, data.data.secondName)
@@ -64,6 +54,7 @@ class Auth {
         const avatar = localStorage.getItem(localStorageVariables.avatar)
         const email = localStorage.getItem(localStorageVariables.email)
         const nick = localStorage.getItem(localStorageVariables.nick)
+
         localStorage.clear()
 
         await localStorage.setItem(localStorageVariables.firstName, firstName)

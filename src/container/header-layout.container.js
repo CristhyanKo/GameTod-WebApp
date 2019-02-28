@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Affix } from 'antd'
 import { Button } from 'reactstrap'
 import styled from 'styled-components'
 import imageLogo from '../assets/image/lg.png'
@@ -44,22 +43,22 @@ class HeaderLayout extends Component {
         )
 
         return (
-                <Container>
-                    <LeftContainer>
-                        <img alt='GameTod' src={imageLogo} height='50' />
-                    </LeftContainer>
+            <Container>
+                <LeftContainer>
+                    <img alt='GameTod' src={imageLogo} height='50' />
+                </LeftContainer>
 
-                    <RightContainer>
-                        <Popover placement="bottomRight" title={<b>{localStorage.getItem(localStorageVariables.nick)}</b>} content={MenuUserTop} trigger="click">
-                            <AvatarImage id="MenuUser">
-                                <AvatarUser size={40} fontSize={''} />
-                            </AvatarImage>
-                            <Tooltip placement="bottom" title="Online" style={{ position: 'absolute' }}>
-                                <a style={{ position: 'absolute', top: 30, right: 22 }} href='/#'><Label circular color='green' empty /></a>
-                            </Tooltip>
-                        </Popover>
-                    </RightContainer>
-                </Container>
+                <RightContainer>
+                    <Popover placement="bottomRight" title={<b>{localStorage.getItem(localStorageVariables.nick)}</b>} content={MenuUserTop} trigger="click">
+                        <AvatarImage id="MenuUser">
+                            <AvatarUser imageSrc={localStorage.getItem(localStorageVariables.avatar)} size={40} fontSize={''} />
+                        </AvatarImage>
+                        <Tooltip placement="bottom" title="Online" style={{ position: 'absolute' }}>
+                            <a style={{ position: 'absolute', top: 30, right: 22 }} href='/#'><Label circular color='green' empty /></a>
+                        </Tooltip>
+                    </Popover>
+                </RightContainer>
+            </Container>
         )
     }
 }
